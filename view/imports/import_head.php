@@ -5,5 +5,6 @@
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../resources/css/normalize.css">
     <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap-datetimepicker.min.css">
 </head>
 

@@ -28,6 +28,20 @@ header {
     padding: 10px;
     background-color: #eee;
 }
+.btn-group {
+    margin-top: -90px;
+    margin-left: 10px;
+}
+.btn-menu {
+    position: absolute;
+    z-index: 40;
+    cursor: pointer;
+    color: #fff;
+    top: -20px;
+}
+.content .content {
+    width: 100%;
+}
 @media(min-width:992px) {
     .content {
         width: 800px;

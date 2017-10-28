@@ -29,8 +29,10 @@ if (isset($_SESSION['alert'])) {
                 <?php
                 if($alert == 0) {
                     $msg->showErrorMessage("Usuário ou senha incorretos!");
-                    unset($_SESSION['alert']);
+                } else if($alert == 1) {
+                    $msg->showErrorMessage("É preciso efetuar o login para ter acesso ao sistema!");
                 }
+                unset($_SESSION['alert']);
                 ?>
 
                 <form method="post" autocomplete="off" action="../controller/UsuarioController.php?param=-1">

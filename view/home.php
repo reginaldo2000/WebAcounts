@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-session_start();
+include_once('./imports/import_security.php');
 ?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -19,5 +19,6 @@ and open the template in the editor.
                 <h4 class="content-title">Dashboard</h4>
             </section>
         </div>
+        <?php include_once('./imports/import_footer.php');?>
     </body>
 </html>
