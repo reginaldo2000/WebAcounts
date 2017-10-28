@@ -12,5 +12,7 @@ $(function () {
 $(document).ready(function () {
     $("#moeda").maskMoney({showSymbol: true, symbol: "R$", decimal: ",", thousands: ""});
 });
-
+function linkFrom(link) {
+    location.href = link;
+}
 

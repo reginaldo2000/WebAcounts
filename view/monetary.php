@@ -31,7 +31,7 @@ include_once('../model/Message.php');
                 unset($_SESSION['alert']);
                 ?>
                 
-                <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Consultar</button>
+                <button class="btn btn-default" onclick="linkFrom('find_monetary.php');"><i class="glyphicon glyphicon-search"></i> Consultar</button>
                 <section class="content">
                     <form method="post" autocomplete="off" action="../controller/MonetaryController.php?param=1">
                         <div class="row">
