@@ -7,5 +7,7 @@
         <li><a href="monetary.php">Cadastrar Receita/Despesa</a></li>
         <li><a href="#">Consultas</a></li>
         <li><a href="#">Histórico</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Sair</a></li>
     </ul>
 </div>

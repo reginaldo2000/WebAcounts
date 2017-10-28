@@ -3,7 +3,7 @@ include_once('../connection/ConnectDB.php');
 
 class Generic {
     
-    private $id;
+    protected $id;
     protected $con;
     
     public function getId() {

@@ -5,9 +5,12 @@
  */
 $(function () {
     $('#data').datetimepicker({
-        format: 'D/M/YYYY',
+        format: 'DD/MM/YYYY',
         locale: 'pt-br'
     });
+});
+$(document).ready(function () {
+    $("#moeda").maskMoney({showSymbol: true, symbol: "R$", decimal: ",", thousands: ""});
 });
 
 
