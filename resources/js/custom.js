@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 $(function () {
-    $('#data').datetimepicker({
+    $('#data, #data-inicial, #data-final').datetimepicker({
         format: 'DD/MM/YYYY',
         locale: 'pt-br'
     });

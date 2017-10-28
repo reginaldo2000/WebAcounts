@@ -15,7 +15,12 @@ class Generic {
     }
     
     public function findAll($table) {
-        
+        $this->con = new ConnectDB();
+        $pdo = $this->con->getConnection();
+        $st = $pdo->prepare('SELECT * FROM '.$table.' WHERE id_usuario = :userid');
+        $st->bindValue(':userid', $_SESSION['userid']);
+        $st->execute();
+        return $st;
     }
 
     public function delete($table) {

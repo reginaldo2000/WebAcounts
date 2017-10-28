@@ -42,10 +42,43 @@ class MonetaryModel extends Generic {
         $st->execute();
     }
 
+    public function find($descricao, $dataInicial, $dataFinal) {
+        $restricao = $this->getRestrictions($descricao, $dataInicial, $dataFinal);
+        $this->con = new ConnectDB();
+        $pdo = $this->con->getConnection();
+        $st = $pdo->prepare('SELECT * FROM dt_monetary WHERE id_usuario = :userid' .$restricao);
+        $st->bindValue(':userid', $_SESSION['userid']);
+        $st->execute();
+        $retorno = '';
+        if ($st->rowCount() > 0) {
+            while ($money = $st->fetch(PDO::FETCH_OBJ)) {
+                $retorno .= '<tr><td>' . $money->descricao . '</td>'
+                        . '<td>' . (($money->tipo == "r") ? "Receita" : "Despesa") . '</td>'
+                        . '<td>' . str_replace(".", ",", $money->valor) . '</td>'
+                        . '<td>' . date('d/m/Y', $money->data) . '</td>'
+                        . '<td class="text-center"><i class="glyphicon glyphicon-edit"></i> <i class="glyphicon glyphicon-trash"></i></td></tr>';
+            }
+        } else {
+            $retorno = '<tr><td colspan="5"><b>Nenhum registro encontrado!</b></td></tr>';
+        }
+        return $retorno;
+    }
+
+    function getRestrictions($descricao, $dataInicial, $dataFinal) {
+        $restricao = '';
+        if ($descricao != "" || $descricao != " ") {
+            $restricao .= ' AND descricao LIKE "%' . $descricao . '%"';
+        }
+        if ($dataInicial != "" && $dataFinal != "") {
+            $restricao .= ' AND data between ' . $dataInicial . ' AND ' . $dataFinal;
+        }
+        return $restricao;
+    }
+
     public function formatDate($data) {
         $newdate = "";
         $array = explode('/', $data);
-        $newdate = $array[2].'-'.$array[1].'-'.$array[0];
+        $newdate = $array[2] . '-' . $array[1] . '-' . $array[0];
         return date('U', strtotime($newdate));
     }
 
