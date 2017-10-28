@@ -23,6 +23,8 @@ class UsuarioModel extends Generic {
         $st->bindValue(':senha', $this->senha);
         $st->execute();
         if($st->rowCount() > 0) {
+            $usuario = $st->fetch(PDO::FETCH_OBJ);
+            $_SESSION['userid'] = $usuario->id;
             return true;
         } else {
             return false;

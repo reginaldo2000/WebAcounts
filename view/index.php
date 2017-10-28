@@ -6,6 +6,9 @@ and open the template in the editor.
 -->
 <?php
 session_start();
+if(isset($_SESSION['userid'])) {
+    header('location:home.php');
+}
 include('../model/Message.php');
 $alert = -1;
 $msg = new Message();
@@ -26,6 +29,7 @@ if (isset($_SESSION['alert'])) {
                 <?php
                 if($alert == 0) {
                     $msg->showErrorMessage("Usuário ou senha incorretos!");
+                    unset($_SESSION['alert']);
                 }
                 ?>
 
@@ -46,7 +50,7 @@ if (isset($_SESSION['alert'])) {
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i> Entrar</button>
                 </form>
             </section>
         </div>
