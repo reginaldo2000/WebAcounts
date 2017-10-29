@@ -46,7 +46,7 @@ class MonetaryModel extends Generic {
         $restricao = $this->getRestrictions($descricao, $dataInicial, $dataFinal);
         $this->con = new ConnectDB();
         $pdo = $this->con->getConnection();
-        $st = $pdo->prepare('SELECT * FROM dt_monetary WHERE id_usuario = :userid' .$restricao);
+        $st = $pdo->prepare('SELECT * FROM dt_monetary WHERE id_usuario = :userid' .$restricao.' ORDER BY data');
         $st->bindValue(':userid', $_SESSION['userid']);
         $st->execute();
         $retorno = '';
@@ -56,7 +56,7 @@ class MonetaryModel extends Generic {
                         . '<td>' . (($money->tipo == "r") ? "Receita" : "Despesa") . '</td>'
                         . '<td>' . str_replace(".", ",", $money->valor) . '</td>'
                         . '<td>' . date('d/m/Y', $money->data) . '</td>'
-                        . '<td class="text-center"><i class="glyphicon glyphicon-edit"></i> <i class="glyphicon glyphicon-trash"></i></td></tr>';
+                        . '<td class="text-center"><i class="glyphicon glyphicon-edit" title="Editar"></i> &emsp;<i class="glyphicon glyphicon-trash" title="Excluir"></i></td></tr>';
             }
         } else {
             $retorno = '<tr><td colspan="5"><b>Nenhum registro encontrado!</b></td></tr>';
@@ -69,7 +69,7 @@ class MonetaryModel extends Generic {
         if ($descricao != "" || $descricao != " ") {
             $restricao .= ' AND descricao LIKE "%' . $descricao . '%"';
         }
-        if ($dataInicial != "" && $dataFinal != "") {
+        if ($dataInicial != 0 && $dataFinal != 0) {
             $restricao .= ' AND data between ' . $dataInicial . ' AND ' . $dataFinal;
         }
         return $restricao;

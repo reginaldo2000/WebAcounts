@@ -73,7 +73,7 @@ include_once('../model/Message.php');
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i>&ensp; Cadastrar</button>
                         </div
                     </form>
                 </section>

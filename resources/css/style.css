@@ -49,6 +49,9 @@ header {
     text-align: center;
     text-transform: uppercase;
 }
+.table tbody tr td i {
+    cursor: pointer;
+}
 @media(min-width:992px) {
     .content {
         width: 800px;

@@ -40,7 +40,7 @@ if (isset($_SESSION['alert'])) {
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label">Usuário:</label>
-                                <input type="text" class="form-control" name="usuario">
+                                <input type="text" class="form-control" name="usuario" required>
                             </div>
                         </div>
                     </div>
@@ -48,11 +48,11 @@ if (isset($_SESSION['alert'])) {
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label">Senha:</label>
-                                <input type="password" class="form-control" name="senha">
+                                <input type="password" class="form-control" name="senha" required>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-share"></i> Entrar</button>
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-log-in"></i>&ensp; Entrar</button>
                 </form>
             </section>
         </div>

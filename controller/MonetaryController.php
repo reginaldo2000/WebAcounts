@@ -25,5 +25,9 @@ if($param == 4) {
     $_SESSION['retorno_consulta'] = $monetary->find($_POST['descricao'], $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final'])+80000));
     header('location:../view/find_monetary.php');
 }
+if($param == 10) {
+    session_destroy();
+    header('location:../view/');
+}
 
 
