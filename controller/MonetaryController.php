@@ -22,7 +22,7 @@ if ($param == 1) {
 if ($param == 4) {
     $descricao = $_POST['descricao2'];
     $monetary = new MonetaryModel(null, null, null, null, null, null);
-    $_SESSION['retorno_consulta'] = $monetary->find($_POST['descricao'], $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
+    $_SESSION['retorno_consulta'] = $monetary->find($descricao, $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
     header('location:../view/find_monetary.php');
 }
 if ($param == 6) {
