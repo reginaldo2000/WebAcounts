@@ -56,12 +56,24 @@ class MonetaryModel extends Generic {
                         . '<td>' . (($money->tipo == "r") ? "Receita" : "Despesa") . '</td>'
                         . '<td>' . str_replace(".", ",", $money->valor) . '</td>'
                         . '<td>' . date('d/m/Y', $money->data) . '</td>'
-                        . '<td class="text-center"><i class="glyphicon glyphicon-edit" title="Editar"></i> &emsp;<i class="glyphicon glyphicon-trash" title="Excluir"></i></td></tr>';
+                        . '<td class="text-center"><i class="glyphicon glyphicon-edit" title="Editar" onclick="loadDataMonetary('.$money->id.');" data-toggle="modal" data-target="#modal-edicao"></i> &emsp;'
+                        . '<i class="glyphicon glyphicon-trash bg-red" title="Excluir"></i>'
+                        . '</td></tr>';
             }
         } else {
             $retorno = '<tr><td colspan="5"><b>Nenhum registro encontrado!</b></td></tr>';
         }
         return $retorno;
+    }
+    
+    public function findById() {
+        $this->con = new ConnectDB();
+        $pdo = $this->con->getConnection();
+        $st = $pdo->prepare('SELECT * FROM dt_monetary WHERE id = :id');
+        $st->bindValue(':id', $this->id);
+        $st->execute();
+        $money = $st->fetch(PDO::FETCH_OBJ);
+        return $money;
     }
 
     function getRestrictions($descricao, $dataInicial, $dataFinal) {

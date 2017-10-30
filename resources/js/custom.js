@@ -15,4 +15,21 @@ $(document).ready(function () {
 function linkFrom(link) {
     location.href = link;
 }
-
+function loadDataMonetary(id) {
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: '../controller/MonetaryController.php?param=6',
+        data: {
+            mid: id
+        },
+        success: function (ret) {
+//            alert(ret[0]['data
+            document.getElementById('desc').value = ret[0]['descricao'];
+            document.getElementById('tipo').value = ret[0]['tipo'];
+            var str = ret[0]['valor'];
+            document.getElementById('moeda').value = str.replace(".",",");
+            document.getElementById('data-conta').value = ret[0]['data'];
+        }
+    });
+}
