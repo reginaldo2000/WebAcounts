@@ -6,6 +6,12 @@ and open the template in the editor.
 -->
 <?php
 include_once('./imports/import_security.php');
+include_once('../model/Message.php');
+$alert = 0;
+$msg = new Message();
+if(isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+}
 ?>
 <html>
     <?php include_once('./imports/import_head.php'); ?>
@@ -22,10 +28,11 @@ include_once('./imports/import_security.php');
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Título do modal</h4>
+                            <h4 class="modal-title">Atualizar Dados</h4>
                         </div>
                         <div class="modal-body">
-                            <form method="post" autocomplete="off" action="">
+                            <form method="post" autocomplete="off" action="../controller/MonetaryController.php?param=2">
+                                <input type="text" class="form-control hidden" id="id-conta" name="id">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -65,7 +72,7 @@ include_once('./imports/import_security.php');
                                     </div>
                                 </div>
                                 <div class="panel-footer">
-                                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i>&ensp; Confirmar Edição</button>
+                                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i>&ensp; Confirmar Edição</button>
                                 </div>
                             </form>
                         </div>
@@ -76,6 +83,13 @@ include_once('./imports/import_security.php');
 
             <section class="content">
                 <h4 class="content-title">Consulta de Receitas/Despesas</h4>
+                
+                <?php
+                if($alert == 2) {
+                    $msg->showSuccessMessage("Dados atualizados com sucesso!");
+                }
+                unset($_SESSION['alert']);
+                ?>
 
                 <button class="btn btn-default" style="margin-bottom: 10px" onclick="linkFrom('monetary.php');"><i class="glyphicon glyphicon-plus"></i> Cadastrar Novo</button>
 
@@ -116,7 +130,7 @@ include_once('./imports/import_security.php');
                 </form>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="tabela">
                         <thead>
                             <tr>
                                 <th>Descrição</th>

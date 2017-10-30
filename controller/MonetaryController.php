@@ -19,8 +19,19 @@ if ($param == 1) {
     $_SESSION['alert'] = 1;
     header('location:../view/monetary.php');
 }
+if($param == 2) {
+    $id = $_POST['id'];
+    $descricao = $_POST['descricao'];
+    $tipo = $_POST['tipo'];
+    $valor = str_replace(",", ".", $_POST['valor']);
+    $monetary = new MonetaryModel($id, $userid, $descricao, $tipo, $valor, null);
+    $monetary->setData($monetary->formatDate($_POST['data']));
+    $monetary->update();
+    $_SESSION['alert'] = 2;
+    header('location:MonetaryController.php?param=4');
+}
 if ($param == 4) {
-    $descricao = $_POST['descricao2'];
+    $descricao = (isset($_POST['descricao2']))?$_POST['descricao2']:"";
     $monetary = new MonetaryModel(null, null, null, null, null, null);
     $_SESSION['retorno_consulta'] = $monetary->find($descricao, $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
     header('location:../view/find_monetary.php');

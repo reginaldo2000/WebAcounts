@@ -41,6 +41,18 @@ class MonetaryModel extends Generic {
         $st->bindParam(5, $this->data);
         $st->execute();
     }
+    
+    public function update() {
+        $this->con = new ConnectDB();
+        $pdo = $this->con->getConnection();
+        $st = $pdo->prepare('UPDATE dt_monetary SET descricao = ?, tipo = ?, valor = ?, data = ? WHERE id = ?');
+        $st->bindParam(1, $this->descricao);
+        $st->bindParam(2, $this->tipo);
+        $st->bindParam(3, $this->valor);
+        $st->bindParam(4, $this->data);
+        $st->bindParam(5, $this->id);
+        $st->execute();
+    }
 
     public function find($descricao, $dataInicial, $dataFinal) {
         $restricao = $this->getRestrictions($descricao, $dataInicial, $dataFinal);
@@ -52,7 +64,7 @@ class MonetaryModel extends Generic {
         $retorno = '';
         if ($st->rowCount() > 0) {
             while ($money = $st->fetch(PDO::FETCH_OBJ)) {
-                $retorno .= '<tr><td>' . $money->descricao . '</td>'
+                $retorno .= '<tr><td class="text-uppercase">' . $money->descricao . '</td>'
                         . '<td>' . (($money->tipo == "r") ? "Receita" : "Despesa") . '</td>'
                         . '<td>' . str_replace(".", ",", $money->valor) . '</td>'
                         . '<td>' . date('d/m/Y', $money->data) . '</td>'
