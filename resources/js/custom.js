@@ -9,12 +9,22 @@ $(function () {
         locale: 'pt-br'
     });
 });
+
 $(document).ready(function () {
     $("#moeda").maskMoney({showSymbol: true, symbol: "R$", decimal: ",", thousands: ""});
 });
+
+$(document).ready(function () {
+    $('#tabela').DataTable();
+    if ($('#tabela tr td').hasClass('dataTables_empty')) {
+        $('#tabela .odd td').html("Clique em buscar para realizar a consulta");
+    }
+});
+
 function linkFrom(link) {
     location.href = link;
 }
+
 function loadDataMonetary(id) {
     $.ajax({
         type: 'post',
@@ -33,6 +43,7 @@ function loadDataMonetary(id) {
         }
     });
 }
-$(document).ready(function () {
-    $('#tabela').DataTable();
-});
+
+function getId(id) {
+    document.getElementById('id-exclusao').value = id;
+}

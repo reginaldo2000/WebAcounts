@@ -9,7 +9,7 @@ include_once('./imports/import_security.php');
 include_once('../model/Message.php');
 $alert = 0;
 $msg = new Message();
-if(isset($_SESSION['alert'])) {
+if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
 }
 ?>
@@ -81,12 +81,35 @@ if(isset($_SESSION['alert'])) {
             </div><!-- /.modal -->
             <!--FIM DO MODAL DE EDIÇÃO-->
 
+            <!--MODAL DE EXCLUSÃO-->
+            <div class="modal fade" id="modal-exclusao" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Excluir</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Deseja realmente excluir o resgistro?</h5>
+                            <form method="post" class="center-block" action="../controller/MonetaryController.php?param=3">
+                                <input type="text" class="hidden" id="id-exclusao" name="id">
+                                <button type="submit" class="btn btn-primary">Sim</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                            </form>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!--FIM DO MODAL DE EXCLUSÃO-->
+
             <section class="content">
                 <h4 class="content-title">Consulta de Receitas/Despesas</h4>
-                
+
                 <?php
-                if($alert == 2) {
+                if ($alert == 2) {
                     $msg->showSuccessMessage("Dados atualizados com sucesso!");
+                } else if($alert == 3) {
+                    $msg->showSuccessMessage("Dados excluídos com sucesso!");
                 }
                 unset($_SESSION['alert']);
                 ?>

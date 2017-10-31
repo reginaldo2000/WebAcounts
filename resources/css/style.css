@@ -55,6 +55,13 @@ header {
 .bg-red {
     color: #e22;
 }
+.pagination li:first-child, .pagination .next {
+    display:none;
+}
+.dataTables_info, .dataTables_length, .dataTables_filter {
+    display: none;
+}
+
 @media(min-width:992px) {
     .content {
         width: 800px;

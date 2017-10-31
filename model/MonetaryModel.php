@@ -68,8 +68,8 @@ class MonetaryModel extends Generic {
                         . '<td>' . (($money->tipo == "r") ? "Receita" : "Despesa") . '</td>'
                         . '<td>' . str_replace(".", ",", $money->valor) . '</td>'
                         . '<td>' . date('d/m/Y', $money->data) . '</td>'
-                        . '<td class="text-center"><i class="glyphicon glyphicon-edit" title="Editar" onclick="loadDataMonetary('.$money->id.');" data-toggle="modal" data-target="#modal-edicao"></i> &emsp;'
-                        . '<i class="glyphicon glyphicon-trash bg-red" title="Excluir"></i>'
+                        . '<td class="text-center"><i class="material-icons" title="Editar" onclick="loadDataMonetary('.$money->id.');" data-toggle="modal" data-target="#modal-edicao">edit</i> &emsp;'
+                        . '<i class="material-icons bg-red" title="Excluir" onclick="getId('.$money->id.');" data-toggle="modal" data-target="#modal-exclusao">delete_forever</i>'
                         . '</td></tr>';
             }
         } else {

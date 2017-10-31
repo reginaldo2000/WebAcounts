@@ -9,6 +9,7 @@ if (isset($_GET['param'])) {
     header('location:../view/monetary.php');
 }
 
+//CHAMA A FUNÇÃO SAVE
 if ($param == 1) {
     $descricao = $_POST['descricao'];
     $tipo = $_POST['tipo'];
@@ -19,7 +20,8 @@ if ($param == 1) {
     $_SESSION['alert'] = 1;
     header('location:../view/monetary.php');
 }
-if($param == 2) {
+//CHAMA A FUNÇÃO UPDATE
+if ($param == 2) {
     $id = $_POST['id'];
     $descricao = $_POST['descricao'];
     $tipo = $_POST['tipo'];
@@ -30,12 +32,22 @@ if($param == 2) {
     $_SESSION['alert'] = 2;
     header('location:MonetaryController.php?param=4');
 }
+//CHAMA A FUNÇÃO DELETE
+if ($param == 3) {
+    $id = $_POST['id'];
+    $monetary = new MonetaryModel($id, null, null, null, null, null);
+    $monetary->delete("dt_monetary");
+    $_SESSION['alert'] = 3;
+    header('location:MonetaryController.php?param=4');
+}
+//CHAMA A FUNÇÃO FIND
 if ($param == 4) {
-    $descricao = (isset($_POST['descricao2']))?$_POST['descricao2']:"";
+    $descricao = (isset($_POST['descricao2'])) ? $_POST['descricao2'] : "";
     $monetary = new MonetaryModel(null, null, null, null, null, null);
     $_SESSION['retorno_consulta'] = $monetary->find($descricao, $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
     header('location:../view/find_monetary.php');
 }
+//CHAMA A FUNÇÃO FINDBYID
 if ($param == 6) {
     $mon = new MonetaryModel($_POST['mid'], null, null, null, null, null);
     $obj = $mon->findById();
@@ -46,6 +58,7 @@ if ($param == 6) {
     $vetor[0]["data"] = date('d/m/Y', $obj->data);
     echo json_encode($vetor);
 }
+//FAZ O LOGOFF DO SISTEMA
 if ($param == 10) {
     session_destroy();
     header('location:../view/');
