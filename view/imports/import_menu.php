@@ -24,7 +24,7 @@
         <li role="separator" class="divider"></li>
         <li><a href="monetary.php">Cadastrar Receita/Despesa</a></li>
         <li><a href="find_monetary.php">Consultas</a></li>
-        <li><a href="#">Histórico</a></li>
+        <li><a href="historic.php">Histórico</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="#" data-toggle="modal" data-target="#modal-logoff">Sair</a></li>
     </ul>
