@@ -15,6 +15,13 @@ if (isset($_SESSION['alert'])) {
 ?>
 <html>
     <?php include_once('./imports/import_head.php'); ?>
+    <style type="text/css">
+        @media(min-width: 992px) {
+            .content {
+                width: 1000px;
+            }
+        }
+    </style>
     <body>
         <?php
         include_once('./imports/import_header.php');
@@ -174,8 +181,31 @@ if (isset($_SESSION['alert'])) {
                         </tbody>
                     </table>
                 </div>
+
+                <!-- opções de valores totais -->
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span>Total de Receitas:</span>
+                            <span class="receita-total">R$ <?php echo str_replace(".", ",", number_format($_SESSION['receita'],2));?></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span>Total de Despesas:</span>
+                            <span class="despesa-total">R$ <?php echo str_replace(".",",", number_format($_SESSION['despesa'], 2));?></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span>Saldo Total:</span>
+                            <span class="saldo-total">R$ <?php echo str_replace(".",",", number_format(($_SESSION['receita'] - $_SESSION['despesa']), 2));?></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- fim -->
             </section>
         </div>
-        <?php include_once('./imports/import_footer.php'); ?>
+        <?php 
+        include_once('./imports/import_footer.php'); 
+        $_SESSION['receita'] = 0;
+        $_SESSION['despesa'] = 0;
+        ?>
     </body>
 </html>

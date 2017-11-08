@@ -61,7 +61,18 @@ header {
 .dataTables_info, .dataTables_length, .dataTables_filter {
     display: none;
 }
-
+.receita-total {
+    color: #0d0;
+    font-weight: bold;
+}
+.despesa-total {
+    color: #d00;
+    font-weight: bold;
+}
+.saldo-total {
+    color: #00d;
+    font-weight: bold;
+}
 @media(min-width:992px) {
     .content {
         width: 800px;

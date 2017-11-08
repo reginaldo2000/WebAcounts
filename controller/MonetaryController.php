@@ -40,11 +40,17 @@ if ($param == 3) {
     $_SESSION['alert'] = 3;
     header('location:MonetaryController.php?param=4');
 }
-//CHAMA A FUNÇÃO FIND
+//CHAMA A FUNÇÃO FIND E CALCULA OS VALORES TOTAIS DE RECEITA E DESPESA
 if ($param == 4) {
     $descricao = (isset($_POST['descricao2'])) ? $_POST['descricao2'] : "";
     $monetary = new MonetaryModel(null, null, null, null, null, null);
     $_SESSION['retorno_consulta'] = $monetary->find($descricao, $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
+
+    //ARMAZENA A RECEITA TOTAL NA SESSÃO
+    $_SESSION['receita'] = $monetary->calculateTotalReceitas($descricao, $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
+
+    //ARMAZENA A DESPESA TOTAL NA SESSÃO
+    $_SESSION['despesa'] = $monetary->calculateTotalDespesas($descricao, $monetary->formatDate($_POST['data_inicial']), ($monetary->formatDate($_POST['data_final']) + 80000));
     header('location:../view/find_monetary.php');
 }
 //CHAMA A FUNÇÃO FINDBYID

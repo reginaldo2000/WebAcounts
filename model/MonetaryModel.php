@@ -77,6 +77,38 @@ class MonetaryModel extends Generic {
         }
         return $retorno;
     }
+
+    public function calculateTotalReceitas($descricao, $dataInicial, $dataFinal) {
+        $restricao = $this->getRestrictions($descricao, $dataInicial, $dataFinal);
+        $this->con = new ConnectDB();
+        $pdo = $this->con->getConnection();
+        $st = $pdo->prepare('SELECT * FROM dt_monetary WHERE id_usuario = :userid AND tipo = "r" ' .$restricao.' ORDER BY data');
+        $st->bindValue(':userid', $_SESSION['userid']);
+        $st->execute();
+        $retorno = 0;
+        if ($st->rowCount() > 0) {
+            while ($money = $st->fetch(PDO::FETCH_OBJ)) {
+                $retorno += $money->valor;
+            }
+        } 
+        return $retorno;
+    }
+
+    public function calculateTotalDespesas($descricao, $dataInicial, $dataFinal) {
+        $restricao = $this->getRestrictions($descricao, $dataInicial, $dataFinal);
+        $this->con = new ConnectDB();
+        $pdo = $this->con->getConnection();
+        $st = $pdo->prepare('SELECT * FROM dt_monetary WHERE id_usuario = :userid AND tipo = "d" ' .$restricao.' ORDER BY data');
+        $st->bindValue(':userid', $_SESSION['userid']);
+        $st->execute();
+        $retorno = 0;
+        if ($st->rowCount() > 0) {
+            while ($money = $st->fetch(PDO::FETCH_OBJ)) {
+                $retorno += $money->valor;
+            }
+        } 
+        return $retorno;
+    }
     
     public function findById() {
         $this->con = new ConnectDB();
@@ -88,7 +120,7 @@ class MonetaryModel extends Generic {
         return $money;
     }
 
-    function getRestrictions($descricao, $dataInicial, $dataFinal) {
+    private function getRestrictions($descricao, $dataInicial, $dataFinal) {
         $restricao = '';
         if ($descricao != "" || $descricao != " ") {
             $restricao .= ' AND descricao LIKE "%' . $descricao . '%"';
