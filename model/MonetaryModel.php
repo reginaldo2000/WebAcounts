@@ -64,7 +64,7 @@ class MonetaryModel extends Generic {
         $retorno = '';
         if ($st->rowCount() > 0) {
             while ($money = $st->fetch(PDO::FETCH_OBJ)) {
-                $retorno .= '<tr><td class="text-uppercase">' . $money->descricao . '</td>'
+                $retorno .= '<tr><td class="text-uppercase">' . utf8_encode($money->descricao) . '</td>'
                         . '<td>' . (($money->tipo == "r") ? "Receita" : "Despesa") . '</td>'
                         . '<td>' . str_replace(".", ",", $money->valor) . '</td>'
                         . '<td>' . date('d/m/Y', $money->data) . '</td>'

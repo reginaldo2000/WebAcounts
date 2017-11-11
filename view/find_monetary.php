@@ -8,9 +8,17 @@ and open the template in the editor.
 include_once('./imports/import_security.php');
 include_once('../model/Message.php');
 $alert = 0;
+$receita = 0;
+$despesa = 0;
+$saldo = 0;
 $msg = new Message();
 if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
+}
+if(isset($_SESSION['receita']) && isset($_SESSION['despesa'])) {
+    $receita = $_SESSION['receita'];
+    $despesa = $_SESSION['despesa'];
+    $saldo = $receita - $despesa;
 }
 ?>
 <html>
@@ -187,15 +195,15 @@ if (isset($_SESSION['alert'])) {
                     <div class="row">
                         <div class="col-md-4">
                             <span>Total de Receitas:</span>
-                            <span class="receita-total">R$ <?php echo str_replace(".", ",", number_format($_SESSION['receita'],2));?></span>
+                            <span class="receita-total">R$ <?php echo str_replace(".", ",", number_format($receita,2));?></span>
                         </div>
                         <div class="col-md-4">
                             <span>Total de Despesas:</span>
-                            <span class="despesa-total">R$ <?php echo str_replace(".",",", number_format($_SESSION['despesa'], 2));?></span>
+                            <span class="despesa-total">R$ <?php echo str_replace(".",",", number_format($despesa, 2));?></span>
                         </div>
                         <div class="col-md-4">
                             <span>Saldo Total:</span>
-                            <span class="saldo-total">R$ <?php echo str_replace(".",",", number_format(($_SESSION['receita'] - $_SESSION['despesa']), 2));?></span>
+                            <span class="saldo-total">R$ <?php echo str_replace(".",",", number_format($saldo, 2));?></span>
                         </div>
                     </div>
                 </div>
