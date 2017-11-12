@@ -13,6 +13,7 @@ and open the template in the editor.
     width: 100%;
     height: 400px;
     border: 1px solid #b7b7b7;
+    display: none;
 }
 .graph-content .graph-header {
     background-color: #c5c5c5;
@@ -61,4 +62,16 @@ and open the template in the editor.
 }
 .graph-content .graph-body .legend span {
     margin-left: 65px;
+}
+.graph-content .graph-body .bar p {
+    color: #000;
+    position: absolute;
+    left: -5px;
+    top: -25px;
+    font-size: 10px;
+}
+@media(min-width:786px) {
+    .graph-content {
+        display: block;
+    }
 }

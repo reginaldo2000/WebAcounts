@@ -1,10 +1,12 @@
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
     <title>Web Acounts</title>
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../resources/css/normalize.css">
     <link rel="stylesheet" href="../resources/css/style.css">
+    <link rel="stylesheet" href="../resources/css/graphic-R.css">
     <link rel="stylesheet" href="../resources/iconfont/material-icons.css">
     <link rel="stylesheet" href="../resources/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="../resources/css/print.css" media="print">

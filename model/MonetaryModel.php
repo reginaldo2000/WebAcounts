@@ -137,10 +137,8 @@ class MonetaryModel extends Generic {
         $newdate = $array[2] . '-' . $array[1] . '-' . $array[0];
         return date('U', strtotime($newdate));
     }
-
-    function getUserid() {
-        return $this->userid;
-    }
+    
+    
 
     function getDescricao() {
         return $this->descricao;

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 include_once('./imports/import_security.php');
+include_once('../controller/GraphicController.php');
+$g = new GraphicController();
 ?>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -97,11 +99,27 @@ and open the template in the editor.
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div id="morris-bar-chart"></div>
+                            <div class="col-md-8">
+                                <div class="graph-content">
+                                    <div class="graph-header">
+                                        Bar Chart
+                                    </div>
+                                    <div class="graph-body">
+                                        <ul>
+                                            <?php $g->graphicVal(); ?>
+                                        </ul>
+                                        <div class="content-bars">
+                                            <?php $g->graphicBars(); ?>
+                                        </div>
+                                        <div class="legend">
+                                            <?php $g->graphicLabels(); ?>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <canvas id="bar-graphic"></canvas>
+                            <div class="col-md-4">
+                                
                             </div>
                             <!-- /.col-lg-8 (nested) -->
                         </div>

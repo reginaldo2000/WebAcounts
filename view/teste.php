@@ -34,7 +34,7 @@ and open the template in the editor.
                                     <?php $g->graphicVal();?>
                                 </ul>
                                 <div class="content-bars">
-                                    <?php $g->graphicBars(); ?>
+                                    <?php $g->graphicBars();?>
                                 </div>
                                 <div class="legend">
                                     <?php $g->graphicLabels();?>
