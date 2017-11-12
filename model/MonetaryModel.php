@@ -11,6 +11,7 @@
  *
  * @author Reginaldo
  */
+
 include_once('../model/Generic.php');
 
 class MonetaryModel extends Generic {
@@ -35,7 +36,7 @@ class MonetaryModel extends Generic {
         $pdo = $this->con->getConnection();
         $st = $pdo->prepare('INSERT INTO dt_monetary (id_usuario, descricao, tipo, valor, data) VALUES(?,?,?,?,?)');
         $st->bindParam(1, $this->userid);
-        $st->bindParam(2, $this->descricao);
+        $st->bindParam(2, utf8_decode($this->descricao));
         $st->bindParam(3, $this->tipo);
         $st->bindParam(4, $this->valor);
         $st->bindParam(5, $this->data);
@@ -46,7 +47,7 @@ class MonetaryModel extends Generic {
         $this->con = new ConnectDB();
         $pdo = $this->con->getConnection();
         $st = $pdo->prepare('UPDATE dt_monetary SET descricao = ?, tipo = ?, valor = ?, data = ? WHERE id = ?');
-        $st->bindParam(1, $this->descricao);
+        $st->bindParam(1, utf8_decode($this->descricao));
         $st->bindParam(2, $this->tipo);
         $st->bindParam(3, $this->valor);
         $st->bindParam(4, $this->data);

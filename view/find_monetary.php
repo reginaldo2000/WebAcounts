@@ -15,7 +15,7 @@ $msg = new Message();
 if (isset($_SESSION['alert'])) {
     $alert = $_SESSION['alert'];
 }
-if(isset($_SESSION['receita']) && isset($_SESSION['despesa'])) {
+if (isset($_SESSION['receita']) && isset($_SESSION['despesa'])) {
     $receita = $_SESSION['receita'];
     $despesa = $_SESSION['despesa'];
     $saldo = $receita - $despesa;
@@ -118,100 +118,103 @@ if(isset($_SESSION['receita']) && isset($_SESSION['despesa'])) {
             <!--FIM DO MODAL DE EXCLUSÃO-->
 
             <section class="content">
-                <h4 class="content-title">Consulta de Receitas/Despesas</h4>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Consulta de Receitas/Despesas</div>
+                    <div class="panel-body">
+                        <?php
+                        if ($alert == 2) {
+                            $msg->showSuccessMessage("Dados atualizados com sucesso!");
+                        } else if ($alert == 3) {
+                            $msg->showSuccessMessage("Dados excluídos com sucesso!");
+                        }
+                        unset($_SESSION['alert']);
+                        ?>
 
-                <?php
-                if ($alert == 2) {
-                    $msg->showSuccessMessage("Dados atualizados com sucesso!");
-                } else if($alert == 3) {
-                    $msg->showSuccessMessage("Dados excluídos com sucesso!");
-                }
-                unset($_SESSION['alert']);
-                ?>
+                        <button class="btn btn-default" style="margin-bottom: 10px" onclick="linkFrom('monetary.php');"><i class="glyphicon glyphicon-plus"></i> Cadastrar Novo</button>
 
-                <button class="btn btn-default" style="margin-bottom: 10px" onclick="linkFrom('monetary.php');"><i class="glyphicon glyphicon-plus"></i> Cadastrar Novo</button>
-
-                <form method="post" autocomplete="off" action="../controller/MonetaryController.php?param=4">
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Descrição:</label>
-                                    <input type="text" class="form-control text-uppercase" name="descricao2">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Data Inicial:</label>
-                                    <div class='input-group date' id='data-inicial'>
-                                        <input type='text' class="form-control" name="data_inicial"/>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
+                        <form method="post" autocomplete="off" action="../controller/MonetaryController.php?param=4">
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Descrição:</label>
+                                            <input type="text" class="form-control text-uppercase" name="descricao2">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Data Inicial:</label>
+                                            <div class='input-group date' id='data-inicial'>
+                                                <input type='text' class="form-control" name="data_inicial"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Data Final:</label>
+                                            <div class='input-group date' id='data-final'>
+                                                <input type='text' class="form-control" name="data_final"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Buscar</button>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Data Final:</label>
-                                    <div class='input-group date' id='data-final'>
-                                        <input type='text' class="form-control" name="data_final"/>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
+                        </form>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="tabela">
+                                <thead>
+                                    <tr>
+                                        <th>Descrição</th>
+                                        <th>Tipo</th>
+                                        <th>Valor</th>
+                                        <th>Data</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (isset($_SESSION['retorno_consulta'])) {
+                                        $dados = $_SESSION['retorno_consulta'];
+                                        echo $dados;
+                                        $_SESSION['retorno_consulta'] = "";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- opções de valores totais -->
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <span>Total de Receitas:</span>
+                                    <span class="receita-total">R$ <?php echo str_replace(".", ",", number_format($receita, 2)); ?></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span>Total de Despesas:</span>
+                                    <span class="despesa-total">R$ <?php echo str_replace(".", ",", number_format($despesa, 2)); ?></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span>Saldo Total:</span>
+                                    <span class="saldo-total">R$ <?php echo str_replace(".", ",", number_format($saldo, 2)); ?></span>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Buscar</button>
-                    </div>
-                </form>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="tabela">
-                        <thead>
-                            <tr>
-                                <th>Descrição</th>
-                                <th>Tipo</th>
-                                <th>Valor</th>
-                                <th>Data</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (isset($_SESSION['retorno_consulta'])) {
-                                $dados = $_SESSION['retorno_consulta'];
-                                echo $dados;
-                                $_SESSION['retorno_consulta'] = "";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- opções de valores totais -->
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <span>Total de Receitas:</span>
-                            <span class="receita-total">R$ <?php echo str_replace(".", ",", number_format($receita,2));?></span>
-                        </div>
-                        <div class="col-md-4">
-                            <span>Total de Despesas:</span>
-                            <span class="despesa-total">R$ <?php echo str_replace(".",",", number_format($despesa, 2));?></span>
-                        </div>
-                        <div class="col-md-4">
-                            <span>Saldo Total:</span>
-                            <span class="saldo-total">R$ <?php echo str_replace(".",",", number_format($saldo, 2));?></span>
-                        </div>
+                        <!-- fim -->
                     </div>
                 </div>
-                <!-- fim -->
             </section>
         </div>
-        <?php 
-        include_once('./imports/import_footer.php'); 
+        <?php
+        include_once('./imports/import_footer.php');
         $_SESSION['receita'] = 0;
         $_SESSION['despesa'] = 0;
         ?>
