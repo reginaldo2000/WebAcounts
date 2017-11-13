@@ -30,7 +30,7 @@ and open the template in the editor.
                                                 <i class="fa fa-money fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge">26</div>
+                                                <div class="huge"><?php echo number_format($g->valorTotalReceitas(), 2, ",", ".");?></div>
                                                 <div>Receitas</div>
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@ and open the template in the editor.
                                                 <i class="fa fa-dollar fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge">26</div>
+                                                <div class="huge"><?php echo number_format($g->valorTotalDespesas(),2,",",".");?></div>
                                                 <div>Despesas</div>
                                             </div>
                                         </div>
@@ -76,7 +76,7 @@ and open the template in the editor.
                                                 <i class="fa fa-credit-card fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge">26</div>
+                                                <div class="huge"><?php echo number_format($g->valorTotalReceitas()-$g->valorTotalDespesas(), 2,",",".");?></div>
                                                 <div>Saldo</div>
                                             </div>
                                         </div>

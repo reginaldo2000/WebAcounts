@@ -80,6 +80,18 @@ class GraphicController {
         }
     }
 
+    public function valorTotalReceitas() {
+        $m = new MonetaryModel(null, null, null, null, null, null);
+        $data = date('U');
+        return $m->calculateTotalReceitas("", $this->getDataInicial($data), $this->getDataFinal($data));
+    }
+    
+    public function valorTotalDespesas() {
+        $m = new MonetaryModel(null, null, null, null, null, null);
+        $data = date('U');
+        return $m->calculateTotalDespesas("", $this->getDataInicial($data), $this->getDataFinal($data));
+    }
+    
     private function getDataInicial($data) {
         $novaData = date('Y-m-d', $data);
         $parts = explode("-", $novaData);
