@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <?php
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Fortaleza');
 include_once('./imports/import_security.php');
 include_once('../controller/GraphicController.php');
+
 $g = new GraphicController();
 ?>
 <!--
@@ -30,14 +33,14 @@ and open the template in the editor.
                                                 <i class="fa fa-money fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge"><?php echo number_format($g->valorTotalReceitas(), 2, ",", ".");?></div>
+                                                <div class="huge"><?php echo number_format($g->valorTotalReceitas(), 2, ",", "."); ?></div>
                                                 <div>Receitas</div>
                                             </div>
                                         </div>
                                     </div>
                                     <a href="#">
                                         <div class="panel-footer">
-                                            <span class="pull-left">View Details</span>
+                                            <span class="pull-left">Ver Detalhes</span>
                                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                             <div class="clearfix"></div>
                                         </div>
@@ -53,14 +56,14 @@ and open the template in the editor.
                                                 <i class="fa fa-dollar fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge"><?php echo number_format($g->valorTotalDespesas(),2,",",".");?></div>
+                                                <div class="huge"><?php echo number_format($g->valorTotalDespesas(), 2, ",", "."); ?></div>
                                                 <div>Despesas</div>
                                             </div>
                                         </div>
                                     </div>
                                     <a href="#">
                                         <div class="panel-footer">
-                                            <span class="pull-left">View Details</span>
+                                            <span class="pull-left">Ver Detalhes</span>
                                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                             <div class="clearfix"></div>
                                         </div>
@@ -76,14 +79,14 @@ and open the template in the editor.
                                                 <i class="fa fa-credit-card fa-5x"></i>
                                             </div>
                                             <div class="col-xs-9 text-right">
-                                                <div class="huge"><?php echo number_format($g->valorTotalReceitas()-$g->valorTotalDespesas(), 2,",",".");?></div>
+                                                <div class="huge"><?php echo number_format($g->valorTotalReceitas() - $g->valorTotalDespesas(), 2, ",", "."); ?></div>
                                                 <div>Saldo</div>
                                             </div>
                                         </div>
                                     </div>
                                     <a href="#">
                                         <div class="panel-footer">
-                                            <span class="pull-left">View Details</span>
+                                            <span class="pull-left">Ver Detalhes</span>
                                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                             <div class="clearfix"></div>
                                         </div>
@@ -110,6 +113,28 @@ and open the template in the editor.
                                         </div>
 
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="panel panel-dark">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-dollar fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="huge"><?php echo number_format($g->getTotalDespesasNextMes(), 2, ",","."); ?></div>
+                                                <div class="text-capitalize">Despesas de <?php echo strftime('%B', date('U', strtotime(date('Y-m-d').'+1 month')));?></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#">
+                                        <div class="panel-footer">
+                                            <span class="pull-left">Ver Detalhes</span>
+                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -71,6 +71,10 @@ header {
     color: #00d;
     font-weight: bold;
 }
+.panel-dark {
+    background-color: rgba(180,110,45, 0.9);
+    color: #fff;
+}
 @media(min-width:992px) {
     .content {
         width: 800px;

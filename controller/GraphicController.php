@@ -45,7 +45,7 @@ class GraphicController {
         $vetor[] = array();
         for ($i = 0; $i < 6; $i++) {
             $vetor[$i] = '<span>' . $this->translate(date('m', $dataAtual)) . '</span>';
-            $novaData = $dataAtual - 2678400;
+            $novaData = date('U', strtotime(date('Y-m-d', $dataAtual).'-1 month'));
             $dataAtual = $novaData;
         }
         for ($b = 5; $b >= 0; $b--) {
@@ -64,7 +64,7 @@ class GraphicController {
             } else {
                 $this->valores[$a] = $m->calculateTotalReceitas("", $this->getDataInicial($dataControle), $this->getDataFinal($dataControle));
                 $varC = 0;
-                $dataControle = $dataControle - 2678400;
+                $dataControle = date('U', strtotime(date('Y-m-d', $dataControle).'-1 month'));
             }
         }
 
@@ -102,7 +102,7 @@ class GraphicController {
     private function getDataFinal($data) {
         $novaData = date('Y-m-d', $data);
         $parts = explode("-", $novaData);
-        $dataFormatada = (intval($parts[1]) == 2) ? $parts[0] . '-' . $parts[1] . '-29' : $parts[0] . '-' . $parts[1] . '-31';
+        $dataFormatada = $parts[0].'-'.$parts[1].'-'.date('t', $data);
         return date('U', strtotime($dataFormatada));
     }
 
@@ -132,6 +132,14 @@ class GraphicController {
             }
         }
         return $max;
+    }
+    
+    public function getTotalDespesasNextMes() {
+        $data = date('U', strtotime(date('Y-m-d').' + 1 month'));
+        $m = new MonetaryModel(null, null, null, null, null, null);
+        $dataInicio = $this->getDataInicial($data);
+        $dataFim = $this->getDataFinal($data);
+        return $m->calculateTotalDespesas("", $dataInicio, $dataFim);
     }
 
 }
